@@ -3,6 +3,9 @@
 """
 import sys
 import argparse
+import os
+import matplotlib.pylab as plt
+import numpy as np
 
 def check_options(options):
     """
@@ -10,7 +13,16 @@ def check_options(options):
     :param options: An `argparse.Namespace` object
     :return:
     """
-    pass
+#    pass
+#    print 'Here are some options' ,options
+    if type(options.num) != int:
+        print 'An integer must be entered for the number of sines'
+        sys.exit(0)
+#    if not (format(os.path.dirname(options.file))):
+#        print 'This folder does not exist'
+#        sys.exit(0)
+        
+    
 
 def create_parser():
     """
@@ -48,13 +60,19 @@ def run(options):
 
     # Do some additional check on the options
     check_options(options)
-
-    pass
-
+    
+    s_time = np.linspace(0,100,1000)    
+    
+    for i in range(options.num):
+        s_amp = np.sin(s_time*i)
+        plt.hold(True)
+        plt.plot(s_time,s_amp)
+        
+    plt.savefig(options.file)
 
 if __name__ == '__main__':
     # Script has been launched
 
     options = parse_args(sys.argv)
-    print options
-#    run(options)
+#    print options
+    run(options)
