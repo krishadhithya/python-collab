@@ -10,13 +10,24 @@ def check_options(options):
     :param options: An `argparse.Namespace` object
     :return:
     """
+    pass
 
 def create_parser():
     """
     Create the Argument Parser for this script
     :return:  An `argparse.ArgumentParser` instance
     """
-    parser = argparse.ArgumentParser('pysines', description="")
+    parser = argparse.ArgumentParser('pysines', description="A function to plot")
+#    parser.add_argument('-f', '--file', dest="file_name", action="store_const",\
+#                          , type=str, help="Optional Output File Name")
+    
+    parser.add_argument('-f', '--file',  action="store",
+                        help="Optional Output File Name")
+    parser.add_argument('-n', '--num',  action="store",default=1,
+                        type=int, help="Optional Input Number")
+    parser.add_argument('args', nargs='*', 
+                        help="Script Arguments")
+
     return parser
 
 def parse_args(args):
@@ -45,4 +56,5 @@ if __name__ == '__main__':
     # Script has been launched
 
     options = parse_args(sys.argv)
-    run(options)
+    print options
+#    run(options)
